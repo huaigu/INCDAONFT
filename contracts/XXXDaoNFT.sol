@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-// Creator: Chao Wang
+// Creator: xxx dev team
 
 // idea borrowed from cyberbrokers
 // this contract is not audited, please use it at your own risk.
