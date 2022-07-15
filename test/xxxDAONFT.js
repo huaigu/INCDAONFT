@@ -1,7 +1,7 @@
 // We import Chai to use its asserting functions here.
 const { expect } = require("chai");
 // an async function.
-describe.only("xxxDAONFT Contract", function () {
+describe("xxxDAONFT Contract", function () {
 
   let hardhatToken;
   let owner;

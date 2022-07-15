@@ -14,13 +14,15 @@ describe("XXXDAOGenesisMint Contract", function () {
     let testMintAccount6;
 
     beforeEach(async function () {
+
+        const totalGenesisMintAmount = 5;
         [owner, testMintAccount1, testMintAccount2, testMintAccount3, testMintAccount4, testMintAccount5, testMintAccount6] = await ethers.getSigners();
 
         NftToken = await ethers.getContractFactory("XXXDaoNFT");
         MintContract = await ethers.getContractFactory("XXXDAOGenesisMint");
 
         daoNFTToken = await NftToken.deploy();
-        hardhatContract = await MintContract.deploy(daoNFTToken.address);
+        hardhatContract = await MintContract.deploy(daoNFTToken.address, totalGenesisMintAmount);
     });
 
     // You can nest describe calls to create subsections.
