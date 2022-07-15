@@ -19,8 +19,8 @@ contract XXXDAOGenesisMint is ReentrancyGuard, Ownable {
 
      // IncubatorDAO NFT contract
     XXXDaoNFT public xxxDAONFT;
-
-    uint256 public constant GENESIS_Mint_AMOUNT = 5;
+    uint256 public genesisMintAmount;
+    
     uint256 internal _leftToMint;
 
     //switches
@@ -31,11 +31,11 @@ contract XXXDAOGenesisMint is ReentrancyGuard, Ownable {
     // minted list
     mapping(address => mapping(uint256 => bool)) internal mintedAddress;
 
-    constructor(address _xxxDAONFTAddress) {
+    constructor(address _xxxDAONFTAddress, uint256 totalMintAmount) {
         // Set the XXX DAO NFT token address
         xxxDAONFT = XXXDaoNFT(_xxxDAONFTAddress);
-
-        _leftToMint = GENESIS_Mint_AMOUNT;
+        genesisMintAmount = totalMintAmount;
+        _leftToMint = totalMintAmount;
     }
 
     
