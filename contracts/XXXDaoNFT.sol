@@ -12,6 +12,9 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract XXXDaoNFT is ERC721, Ownable {
 
+    event URLRoleMapChanged(uint256 indexed role, string tokenURI);
+    event TokenMetadataChanged(uint256 indexed tokenId, bool useCustomizedTokenURI, string tokenURI, uint256 indexed tokenRole);
+
     enum Role {
         VC,
         Moderator,
@@ -55,6 +58,7 @@ contract XXXDaoNFT is ERC721, Ownable {
 
         for (uint256 index = 0; index < role.length; index++) {
             urlRoleMap[role[index]] = tokenURL[index];
+            emit URLRoleMapChanged(uint(role[index]), tokenURL[index]);
         }
     }
 
@@ -63,8 +67,10 @@ contract XXXDaoNFT is ERC721, Ownable {
          require(tokenIds.length == data.length, "wrong parameters");
 
         for (uint256 index = 0; index < tokenIds.length; index++) {
-            tokenMetadata[tokenIds[index]].useCustomizedTokenURI = data[index].useCustomizedTokenURI;
-            tokenMetadata[tokenIds[index]].tokenURI = data[index].tokenURI;
+            Metadata memory metadata = data[index];
+            tokenMetadata[tokenIds[index]].useCustomizedTokenURI = metadata.useCustomizedTokenURI;
+            tokenMetadata[tokenIds[index]].tokenURI = metadata.tokenURI;
+            emit TokenMetadataChanged(tokenIds[index], metadata.useCustomizedTokenURI, metadata.tokenURI, uint256(metadata.tokenRole));
         }
     }
 
