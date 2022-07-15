@@ -1,7 +1,7 @@
 // We import Chai to use its asserting functions here.
 const { expect } = require("chai");
 // an async function.
-describe("xxxDAONFT Contract", function () {
+describe.only("xxxDAONFT Contract", function () {
 
   let hardhatToken;
   let owner;
@@ -55,6 +55,20 @@ describe("xxxDAONFT Contract", function () {
       const tokenID = 0;
       await hardhatToken.connect(testMintAccount).mintNFTFromMintContract(1, testMintAccount.address, tokenID);
       await expect(hardhatToken.tokenURI(tokenID)).to.eventually.equal("ipfs://QQQQ/2");
+    });
+
+    it("Should get right role after mint 1 nft", async function () {
+      await hardhatToken.setMintContract(testMintAccount.address, true);
+      await hardhatToken.setURLRoleMap([0,1,2], ["ipfs://QQQQ/1", "ipfs://QQQQ/2", "ipfs://QQQQ/3"]);
+      const tokenID = 0;
+      await hardhatToken.connect(testMintAccount).mintNFTFromMintContract(1, testMintAccount.address, tokenID);
+      await hardhatToken.connect(testMintAccount).mintNFTFromMintContract(2, testMintAccount.address, tokenID + 1);
+      const metadata = await hardhatToken.tokenMetadata(tokenID);
+      const metadata2 = await hardhatToken.tokenMetadata(tokenID + 1);
+      // const metadata2 = await hardhatToken.getMetadata(tokenID);
+      console.log(metadata);
+      console.log(metadata2);
+      expect(await metadata[2]).to.equal(1);
     });
   });
 });
