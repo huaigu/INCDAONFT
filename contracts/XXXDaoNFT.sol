@@ -161,15 +161,15 @@ contract XXXDaoNFT is ERC721, Ownable {
         super._transfer(from, to, tokenId);
     }
 
-    function safeTransferFrom(
-        address from,
-        address to,
-        uint256 tokenId,
-        bytes memory _data
-    ) public virtual override {
-        require(canTransfer, "token can not be transferred");
-        super.safeTransferFrom(from, to, tokenId, _data);
-    }
+    // function safeTransferFrom(
+    //     address from,
+    //     address to,
+    //     uint256 tokenId,
+    //     bytes memory _data
+    // ) public {
+    //     require(canTransfer, "token can not be transferred");
+    //     super.safeTransferFrom(from, to, tokenId, _data);
+    // }
 
     // 设置是否可以转移NFT
     function setTransfer(bool _canTransfer) public onlyOwner {
