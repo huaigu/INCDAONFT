@@ -2,7 +2,7 @@
 const { expect } = require("chai");
 // const { ethers } = require("ethers");
 // an async function.
-describe.only("xxxDAONFT Contract", function () {
+describe("IncDAONFT Contract", function () {
 
   let hardhatToken;
   let erc721HolderContract;
@@ -14,8 +14,8 @@ describe.only("xxxDAONFT Contract", function () {
   // time. It receives a callback, which can be async.
   beforeEach(async function () {
     // Get the ContractFactory and Signers here.
-    Token = await ethers.getContractFactory("XXXDaoNFT");
-    Holder = await ethers.getContractFactory("xxxDAONFTHolder");
+    Token = await ethers.getContractFactory("IncDaoNFT");
+    Holder = await ethers.getContractFactory("IncDAONFTHolder");
     [owner, testMintAccount, OtherAccount] = await ethers.getSigners();
 
     // To deploy our contract, we just have to call Token.deploy() and await

@@ -1,7 +1,7 @@
 // We import Chai to use its asserting functions here.
 const { expect } = require("chai");
 // an async function.
-describe("XXXDAOGenesisMint Contract", function () {
+describe("IncGenesisMint Contract", function () {
 
     let daoNFTToken;
     let hardhatContract;
@@ -18,8 +18,8 @@ describe("XXXDAOGenesisMint Contract", function () {
         const totalGenesisMintAmount = 5;
         [owner, testMintAccount1, testMintAccount2, testMintAccount3, testMintAccount4, testMintAccount5, testMintAccount6] = await ethers.getSigners();
 
-        NftToken = await ethers.getContractFactory("XXXDaoNFT");
-        MintContract = await ethers.getContractFactory("XXXDAOGenesisMint");
+        NftToken = await ethers.getContractFactory("IncDaoNFT");
+        MintContract = await ethers.getContractFactory("IncDAOGenesisMint");
 
         daoNFTToken = await NftToken.deploy();
         hardhatContract = await MintContract.deploy(daoNFTToken.address, totalGenesisMintAmount);

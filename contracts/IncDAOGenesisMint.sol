@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: MI
-// Creator: Chao Wang
+// Creator: INC DAO dev team
 
-// Genesis mint for xxx DAO NFT
+// Genesis mint for INC DAO NFT
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
-import "./XXXDaoNFT.sol";
+import "./IncDaoNFT.sol";
 
-contract XXXDAOGenesisMint is ReentrancyGuard, Ownable {
+contract IncDAOGenesisMint is ReentrancyGuard, Ownable {
 
     struct mintOpt{
         bool enableMint;
@@ -18,7 +18,7 @@ contract XXXDAOGenesisMint is ReentrancyGuard, Ownable {
     }
 
      // IncubatorDAO NFT contract
-    XXXDaoNFT public xxxDAONFT;
+    IncDaoNFT public xxxDAONFT;
     uint256 public genesisMintAmount;
     
     uint256 internal _leftToMint;
@@ -33,7 +33,7 @@ contract XXXDAOGenesisMint is ReentrancyGuard, Ownable {
 
     constructor(address _xxxDAONFTAddress, uint256 totalMintAmount) {
         // Set the XXX DAO NFT token address
-        xxxDAONFT = XXXDaoNFT(_xxxDAONFTAddress);
+        xxxDAONFT = IncDaoNFT(_xxxDAONFTAddress);
         genesisMintAmount = totalMintAmount;
         _leftToMint = totalMintAmount;
     }
@@ -55,14 +55,14 @@ contract XXXDAOGenesisMint is ReentrancyGuard, Ownable {
 
         //Update
         _leftToMint--;
-        // 每个地址每种角色只能mint一个
+
         mintedAddress[msg.sender][role] = true;
 
         // mint
         xxxDAONFT.mintNFTFromMintContract(role, msg.sender, tokenId);
     }
 
-    // 允许合约拥有者批量mint一些NFT给指定地址
+    // batch mint by admin 
     function adminMint(uint256[] calldata roles, address[] calldata toAddrs) external nonReentrant onlyOwner{
         require(roles.length == toAddrs.length, "length must be equal");
         require(_leftToMint >= roles.length, "Mint request exceeds mint supply");

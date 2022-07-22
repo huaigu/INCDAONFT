@@ -10,7 +10,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract xxxDAONFTHolder is IERC721Receiver {
+contract IncDAONFTHolder is IERC721Receiver {
   function onERC721Received(
     address,
     address,
