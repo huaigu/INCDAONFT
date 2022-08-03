@@ -54,7 +54,7 @@ contract IncDaoNFT is ERC721, Ownable {
     mapping(uint256 => Metadata) public tokenMetadata;
     mapping(Role => string) public urlRoleMap;
 
-    constructor() ERC721("INC DAO Membership Pass", "INCDAO") {}
+    constructor() ERC721("INC DAO PASS", "INP") {}
 
     /**
      * Metadata functionality
