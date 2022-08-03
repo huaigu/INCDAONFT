@@ -90,6 +90,10 @@ contract IncDAOGenesisMint is ReentrancyGuard, Ownable {
         }
     }
 
+    function getWhiteListInfo(address addr) public view returns (mintOpt memory){
+        return whiteList[addr];
+    }
+
     // set switch
     function setOpenMint(bool _setting) external onlyOwner {
         _openMint = _setting;
