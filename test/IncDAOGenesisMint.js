@@ -1,5 +1,6 @@
 // We import Chai to use its asserting functions here.
 const { expect } = require("chai");
+
 // an async function.
 describe("IncGenesisMint Contract", function () {
 
@@ -36,7 +37,20 @@ describe("IncGenesisMint Contract", function () {
         });
     });
 
-    describe("Mint", function () {
+    describe.only("Mint", function () {
+        it("Should set whitelist correctly", async function () {
+            //setup nft contract
+            await daoNFTToken.setMintContract(hardhatContract.address, true);
+
+            await hardhatContract.setOpenMint(true);
+            // mint option, enable:true,role:VC, price：0
+            await hardhatContract.setWhiteList([testMintAccount1.address], [[1, 0, 256]]);
+            const whiteListOpt = await hardhatContract.getWhiteListInfo(testMintAccount1.address);
+
+            expect(whiteListOpt.enableMint).to.equal(true);
+            expect(whiteListOpt.role).to.equal(ethers.BigNumber.from("0x0"));
+            expect(whiteListOpt.mintPrice).to.equal(ethers.BigNumber.from("0x100"));
+        });
         it("Should mint 1 nft", async function () {
             //setup nft contract
             await daoNFTToken.setMintContract(hardhatContract.address, true);
