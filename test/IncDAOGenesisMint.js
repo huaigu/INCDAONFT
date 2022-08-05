@@ -33,11 +33,11 @@ describe("IncGenesisMint Contract", function () {
         });
 
         it("Should be the right daonft address", async function () {
-            expect(await hardhatContract.xxxDAONFT()).to.equal(daoNFTToken.address);
+            expect(await hardhatContract.incDAOToken()).to.equal(daoNFTToken.address);
         });
     });
 
-    describe.only("Mint", function () {
+    describe("Mint", function () {
         it("Should set whitelist correctly", async function () {
             //setup nft contract
             await daoNFTToken.setMintContract(hardhatContract.address, true);
