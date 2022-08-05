@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0
-// Creator: xxx dev team
+// Creator: INC DAO dev team
 
 // idea borrowed from cyberbrokers
 // this contract is not audited, please use it at your own risk.

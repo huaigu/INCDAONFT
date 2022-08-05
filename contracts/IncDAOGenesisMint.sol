@@ -18,7 +18,7 @@ contract IncDAOGenesisMint is ReentrancyGuard, Ownable {
     }
 
      // IncubatorDAO NFT contract
-    IncDaoNFT public xxxDAONFT;
+    IncDaoNFT public incDAOToken;
     uint256 public genesisMintAmount;
     
     uint256 internal _leftToMint;
@@ -31,9 +31,9 @@ contract IncDAOGenesisMint is ReentrancyGuard, Ownable {
     // minted list
     mapping(address => mapping(uint256 => bool)) internal mintedAddress;
 
-    constructor(address _xxxDAONFTAddress, uint256 totalMintAmount) {
-        // Set the XXX DAO NFT token address
-        xxxDAONFT = IncDaoNFT(_xxxDAONFTAddress);
+    constructor(address _incDAOTokenAddress, uint256 totalMintAmount) {
+        // Set the INC DAO NFT token address
+        incDAOToken = IncDaoNFT(_incDAOTokenAddress);
         genesisMintAmount = totalMintAmount;
         _leftToMint = totalMintAmount;
     }
@@ -51,7 +51,7 @@ contract IncDAOGenesisMint is ReentrancyGuard, Ownable {
         // Check that there are mints available for purchase
         require(_leftToMint > 0, "Mint request exceeds mint supply");
 
-        uint256 tokenId = xxxDAONFT.totalMinted();
+        uint256 tokenId = incDAOToken.totalMinted();
 
         //Update
         _leftToMint--;
@@ -59,7 +59,7 @@ contract IncDAOGenesisMint is ReentrancyGuard, Ownable {
         mintedAddress[msg.sender][role] = true;
 
         // mint
-        xxxDAONFT.mintNFTFromMintContract(role, msg.sender, tokenId);
+        incDAOToken.mintNFTFromMintContract(role, msg.sender, tokenId);
     }
 
     // batch mint by admin 
@@ -78,8 +78,8 @@ contract IncDAOGenesisMint is ReentrancyGuard, Ownable {
             mintedAddress[to][role] = true;
 
             // mint
-            uint256 tokenId = xxxDAONFT.totalMinted();
-            xxxDAONFT.mintNFTFromMintContract(role, to, tokenId);
+            uint256 tokenId = incDAOToken.totalMinted();
+            incDAOToken.mintNFTFromMintContract(role, to, tokenId);
         } 
     }
 
